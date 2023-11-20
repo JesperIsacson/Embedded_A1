@@ -5,7 +5,7 @@ import numpy as np
 
 class Client:
     def __init__(self, id, on_message=None):
-      self.client = mqtt.Client(id)
+      self.client = mqtt.Client(id, userdata={"count":0})
       self.ID = id
       if on_message is not None:
         self.client.on_message = on_message
@@ -13,7 +13,6 @@ class Client:
     def connect(self, broker_address):
       try:
         self.client.connect(broker_address) # connect to broker
-        self.client.loop_start()
         print(f"Connected to {broker_address}.")
       except Exception as e:
          print(f"Error: {e}")

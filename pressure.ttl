@@ -1,0 +1,86 @@
+@prefix ex: <http://example.org> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+
+ex:Observation0 a sosa:Observation ;
+    sosa:ObservableProperty ex:sensor_BMP282_atmosphericPressure ;
+    sosa:hasFeatureOfInterest ex:earthAtmosphere ;
+    sosa:hasSimpleResult "2023-11-20 12:05:52.864733" ;
+    sosa:madeBySensor ex:sensor_BMP282 ;
+    sosa:resultTime "41.38" .
+
+ex:Observation1 a sosa:Observation ;
+    sosa:ObservableProperty ex:sensor_BMP282_atmosphericPressure ;
+    sosa:hasFeatureOfInterest ex:earthAtmosphere ;
+    sosa:hasSimpleResult "2023-11-20 12:05:53.877007" ;
+    sosa:madeBySensor ex:sensor_BMP282 ;
+    sosa:resultTime "96.86" .
+
+ex:Observation2 a sosa:Observation ;
+    sosa:ObservableProperty ex:sensor_BMP282_atmosphericPressure ;
+    sosa:hasFeatureOfInterest ex:earthAtmosphere ;
+    sosa:hasSimpleResult "2023-11-20 12:05:54.877448" ;
+    sosa:madeBySensor ex:sensor_BMP282 ;
+    sosa:resultTime "39.44" .
+
+ex:Observation3 a sosa:Observation ;
+    sosa:ObservableProperty ex:sensor_BMP282_atmosphericPressure ;
+    sosa:hasFeatureOfInterest ex:earthAtmosphere ;
+    sosa:hasSimpleResult "2023-11-20 12:05:55.881009" ;
+    sosa:madeBySensor ex:sensor_BMP282 ;
+    sosa:resultTime "48.71" .
+
+ex:Observation4 a sosa:Observation ;
+    sosa:ObservableProperty ex:sensor_BMP282_atmosphericPressure ;
+    sosa:hasFeatureOfInterest ex:earthAtmosphere ;
+    sosa:hasSimpleResult "2023-11-20 12:05:56.886148" ;
+    sosa:madeBySensor ex:sensor_BMP282 ;
+    sosa:resultTime "51.38" .
+
+ex:Observation5 a sosa:Observation ;
+    sosa:ObservableProperty ex:sensor_BMP282_atmosphericPressure ;
+    sosa:hasFeatureOfInterest ex:earthAtmosphere ;
+    sosa:hasSimpleResult "2023-11-20 12:05:57.892233" ;
+    sosa:madeBySensor ex:sensor_BMP282 ;
+    sosa:resultTime "96.55" .
+
+ex:Observation6 a sosa:Observation ;
+    sosa:ObservableProperty ex:sensor_BMP282_atmosphericPressure ;
+    sosa:hasFeatureOfInterest ex:earthAtmosphere ;
+    sosa:hasSimpleResult "2023-11-20 12:05:58.894929" ;
+    sosa:madeBySensor ex:sensor_BMP282 ;
+    sosa:resultTime "84.70" .
+
+ex:Observation7 a sosa:Observation ;
+    sosa:ObservableProperty ex:sensor_BMP282_atmosphericPressure ;
+    sosa:hasFeatureOfInterest ex:earthAtmosphere ;
+    sosa:hasSimpleResult "2023-11-20 12:05:59.901392" ;
+    sosa:madeBySensor ex:sensor_BMP282 ;
+    sosa:resultTime "68.38" .
+
+ex:Observation8 a sosa:Observation ;
+    sosa:ObservableProperty ex:sensor_BMP282_atmosphericPressure ;
+    sosa:hasFeatureOfInterest ex:earthAtmosphere ;
+    sosa:hasSimpleResult "2023-11-20 12:06:00.907901" ;
+    sosa:madeBySensor ex:sensor_BMP282 ;
+    sosa:resultTime "31.51" .
+
+ex:Observation9 a sosa:Observation ;
+    sosa:ObservableProperty ex:sensor_BMP282_atmosphericPressure ;
+    sosa:hasFeatureOfInterest ex:earthAtmosphere ;
+    sosa:hasSimpleResult "2023-11-20 12:06:01.920480" ;
+    sosa:madeBySensor ex:sensor_BMP282 ;
+    sosa:resultTime "49.24" .
+
+ex:iphone7 a sosa:Platform ;
+    rdfs:label "IPhone 7 - IMEI 35-207306-844818-0"@en ;
+    rdfs:comment "IPhone 7 - IMEI 35-207306-844818-0 - John Doe"@en ;
+    sosa:hosts ex:sensor_BMP282 .
+
+ex:earthAtmosphere a sosa:FeatureOfInterest ;
+    rdfs:label "Atmosphere of Earth"@en .
+
+ex:sensor_BMP282 a sosa:Sensor ;
+    rdfs:label "Bosch Sensortec BMP282"@en ;
+    sosa:observes ex:sensor_BMP282_atmosphericPressure .
+
