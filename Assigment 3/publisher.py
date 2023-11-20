@@ -17,6 +17,12 @@ class Client:
       except Exception as e:
          print(f"Error: {e}")
     
+    def loop(self, start_way):
+      if(start_way == "simple"):
+        self.client.loop_start()
+      elif(start_way == "forever"):
+        self.client.loop_forever()
+    
     def subscribe(self, topic):
       try:
         self.client.subscribe(topic) # subscribe
@@ -55,6 +61,7 @@ if __name__ == "__main__":
 
   client = Client("Pub")
   client.connect(broker_address)
+  client.loop("simple")
   client.subscribe(topic)
 
   mu, sigma = 1200.00, 1.0

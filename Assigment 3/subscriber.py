@@ -6,27 +6,9 @@ import time
 from rdflib import Graph, URIRef, Literal, Namespace
 from rdflib.namespace import RDF, RDFS, XSD, SOSA, TIME
 
-def on_message(g, topic, earthAtmosphere, sensor_BMP282_atmosphericPressure, sensor_BMP282, client, userdata, message):
+def on_message(Que, client, userdata, message):
     print("Message recived")
-    [reading, dt] = message.payload.decode('utf-8').split('|')
-    count = userdata["count"]
-    Observation =  EX[f"Observation{count}"]
-    userdata["count"] += 1
-
-    g.add((Observation, RDF.type, SOSA.Observation))
-    g.add((Observation, SOSA.ObservableProperty, sensor_BMP282_atmosphericPressure))
-    g.add((Observation, SOSA.hasFeatureOfInterest, earthAtmosphere))
-    g.add((Observation, SOSA.madeBySensor, sensor_BMP282))
-    g.add((Observation, SOSA.hasSimpleResult, Literal(reading)))
-    g.add((Observation, SOSA.resultTime, Literal(dt)))
-
-    if(userdata["count"] == 10):
-       client.unsubscribe(topic)
-       client.disconnect()
-       with open('pressure.ttl', 'w') as f:
-         f.write(g.serialize(format="turtle"))
-
-
+    Que.put(message.payload.decode('utf-8'))
 
 if __name__=="__main__":
   EX = Namespace('http://example.org')
@@ -59,7 +41,32 @@ if __name__=="__main__":
   #broker_address = "localhost"
   topic = "teds22/group04/pressure"
   q = queue.Queue()
-  client = Client("Sub", on_message=functools.partial(on_message, g, topic, earthAtmosphere, sensor_BMP282_atmosphericPressure, sensor_BMP282))
+  client = Client("Sub", on_message=functools.partial(on_message, q))
   client.connect(broker_address)
+  client.loop("simple")
   client.subscribe(topic)
-  client.client.loop_forever()
+
+  recived_messages = []
+  while(len(recived_messages) < 10):
+    if not q.empty(): 
+      msg = q.get()
+      recived_messages.append(msg)
+    time.sleep(0.5)
+
+  client.unsubscribe(topic)
+  client.disconnect()
+
+  # Can also be done in on_message but felt cleaner to do here
+  for i, msg in enumerate(recived_messages):
+    [reading, dt] = msg.split('|')
+    Observation =  EX[f"Observation{i}"]
+
+    g.add((Observation, RDF.type, SOSA.Observation))
+    g.add((Observation, SOSA.ObservableProperty, sensor_BMP282_atmosphericPressure))
+    g.add((Observation, SOSA.hasFeatureOfInterest, earthAtmosphere))
+    g.add((Observation, SOSA.madeBySensor, sensor_BMP282))
+    g.add((Observation, SOSA.hasSimpleResult, Literal(reading)))
+    g.add((Observation, SOSA.resultTime, Literal(dt)))
+
+  with open('pressure.ttl', 'w') as f:
+    f.write(g.serialize(format="turtle"))
