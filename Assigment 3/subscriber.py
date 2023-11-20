@@ -3,8 +3,8 @@ import queue
 import functools
 import time
 
-from rdflib import Graph, URIRef, Literal, Namespace
-from rdflib.namespace import RDF, RDFS, XSD, SOSA, TIME
+from rdflib import Graph, Literal, Namespace
+from rdflib.namespace import RDF, RDFS, SOSA
 
 def on_message(Que, client, userdata, message):
     print("Message recived")
@@ -36,7 +36,6 @@ if __name__=="__main__":
   g.add((sensor_BMP282, RDFS.label, Literal("Bosch Sensortec BMP282", lang="en")))
   g.add((sensor_BMP282, SOSA.observes, sensor_BMP282_atmosphericPressure))
 
-  counter = 1
   broker_address = "test.mosquitto.org"
   #broker_address = "localhost"
   topic = "teds22/group04/pressure"
