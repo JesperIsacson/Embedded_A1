@@ -68,5 +68,5 @@ if __name__=="__main__":
     g.add((Observation, SOSA.hasSimpleResult, Literal(reading)))
     g.add((Observation, SOSA.resultTime, Literal(dt)))
 
-  with open('pressure.ttl', 'w') as f:
+  with open('./Assigment 3/pressure.ttl', 'w') as f:
     f.write(g.serialize(format="turtle"))
